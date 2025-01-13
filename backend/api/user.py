@@ -1,12 +1,24 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Body
 from services.userService import UserService
+from pydantic import BaseModel
 
 router = APIRouter()
 
+class UserCreate(BaseModel):
+    username: str
+    email: str
+    password: str
+
 @router.post("/create")
-async def create_user(username: str, email: str, password: str):
+async def create_user(
+    user_data: UserCreate = Body(...)  # This expects a JSON body
+):
     try:
-        username = await UserService.create_user(username, email, password)
+        username = await UserService.create_user(
+            username=user_data.username,
+            email=user_data.email,
+            password=user_data.password
+        )
         return {"message": "User created", "username": username}
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
