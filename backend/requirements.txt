@@ -3,3 +3,7 @@ uvicorn
 python-dotenv
 httpx
 requests
+motor
+passlib==2.0.1
+pydantic
+pydantic[email]

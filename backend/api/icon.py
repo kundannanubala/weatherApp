@@ -5,7 +5,7 @@ import os
 
 router = APIRouter()
 
-@router.get("/icon")
+@router.get("/")
 async def get_icon(icon_code: str, size: str = "2x"):
     icon_service = IconService()
     icon_path = icon_service.download_weather_icon(icon_code, size)
