@@ -45,7 +45,6 @@ class IconService:
         if response.status_code == 200:
             with open(icon_path, "wb") as file:
                 file.write(response.content)
-            print(f"Icon saved at: {icon_path}")
         else:
             print(f"Failed to download icon: {response.status_code}")
 

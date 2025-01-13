@@ -53,12 +53,10 @@ async def update_weather(request: UpdateWeatherRequest):
 async def delete_weather(
     request_id: str
 ):
-    logging.info(f"Delete request received for request_id: {request_id}")
     try:
         deleted_count = await CRUDService.delete_weather_request(request_id)
         if not deleted_count:
             raise HTTPException(status_code=404, detail="Weather request not found")
         return {"message": "Weather request deleted"}
     except Exception as e:
-        logging.error(f"Error deleting weather request: {e}")
         raise HTTPException(status_code=400, detail=str(e))

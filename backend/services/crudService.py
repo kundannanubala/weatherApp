@@ -3,11 +3,11 @@ from bson import ObjectId
 import logging
 
 # Configure logging
-logging.basicConfig(
-    filename='app.log',  # Log messages will be written to this file
-    level=logging.INFO,   # Set the logging level to INFO
-    format='%(asctime)s - %(levelname)s - %(message)s'  # Log message format
-)
+# logging.basicConfig(
+#     filename='app.log',  # Log messages will be written to this file
+#     level=logging.INFO,   # Set the logging level to INFO
+#     format='%(asctime)s - %(levelname)s - %(message)s'  # Log message format
+# )
 
 class CRUDService:
     @staticmethod
@@ -39,14 +39,14 @@ class CRUDService:
 
     @staticmethod
     async def delete_weather_request(request_id: str):
-        logging.info(f"Delete operation initiated for request_id: {request_id}")
+        # logging.info(f"Delete operation initiated for request_id: {request_id}")
         result = await db.weather_requests.delete_one(
             {"_id": request_id}  # Remove username check
         )
         
-        if result.deleted_count:
-            # Note: You might want to fetch the username before deletion if you need it for logging
-            await CRUDService.log_operation("system", "DELETE", request_id)
-        else:
-            logging.error(f"No document found for request_id: {request_id}")
+        # if result.deleted_count:
+        #     # Note: You might want to fetch the username before deletion if you need it for logging
+        #     await CRUDService.log_operation("system", "DELETE", request_id)
+        # else:
+        #     logging.error(f"No document found for request_id: {request_id}")
         return result.deleted_count
