@@ -18,9 +18,9 @@ function Navbar() {
           <Link to="/" className="font-bold text-xl hover:text-blue-200">
             Weather App
           </Link>
-          <Link to="/" className="hover:text-blue-200">
+          {/* <Link to="/" className="hover:text-blue-200">
             Home
-          </Link>
+          </Link> */}
         </div>
 
         <div className="flex items-center space-x-4">

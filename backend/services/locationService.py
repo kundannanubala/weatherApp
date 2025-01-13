@@ -7,7 +7,8 @@ settings = Settings()
 class LocationService:
     def __init__(self):
         self.api_key = settings.weatherAPI
-        self.base_url = "http://api.openweathermap.org/geo/1.0/direct"
+        self.direct_url = "http://api.openweathermap.org/geo/1.0/direct"
+        self.reverse_url = "http://api.openweathermap.org/geo/1.0/reverse"
 
     async def get_coordinates(
         self, 
@@ -32,6 +33,27 @@ class LocationService:
         }
 
         async with httpx.AsyncClient() as client:
-            response = await client.get(self.base_url, params=params)
+            response = await client.get(self.direct_url, params=params)
+            response.raise_for_status()
+            return response.json()
+
+    async def get_location_by_coordinates(
+        self,
+        lat: float,
+        lon: float,
+        limit: int = 1
+    ) -> List[Dict]:
+        """
+        Get location details using coordinates (reverse geocoding)
+        """
+        params = {
+            "lat": lat,
+            "lon": lon,
+            "limit": limit,
+            "appid": self.api_key
+        }
+
+        async with httpx.AsyncClient() as client:
+            response = await client.get(self.reverse_url, params=params)
             response.raise_for_status()
             return response.json()

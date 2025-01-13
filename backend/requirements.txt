@@ -7,3 +7,4 @@ motor
 passlib==2.0.1
 pydantic
 pydantic[email]
+python-multipart

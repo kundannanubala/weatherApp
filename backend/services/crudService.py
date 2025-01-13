@@ -1,5 +1,13 @@
 from models.model import db, WeatherRequest, OperationLog
 from bson import ObjectId
+import logging
+
+# Configure logging
+logging.basicConfig(
+    filename='app.log',  # Log messages will be written to this file
+    level=logging.INFO,   # Set the logging level to INFO
+    format='%(asctime)s - %(levelname)s - %(message)s'  # Log message format
+)
 
 class CRUDService:
     @staticmethod
@@ -21,20 +29,24 @@ class CRUDService:
         return await db.weather_requests.find().to_list(None)
 
     @staticmethod
-    async def update_weather_request(username: str, request_id: str, updates: dict):
-        """Update weather request by username and request_id"""
+    async def update_weather_request(request_id: str, updates: dict):
+        """Update weather request by request_id"""
         result = await db.weather_requests.update_one(
-            {"username": username, "_id": ObjectId(request_id)}, 
+            {"_id": request_id},  # Remove username check
             {"$set": updates}
         )
         return result.modified_count
 
     @staticmethod
-    async def delete_weather_request(username: str, request_id: str):
-        """Delete weather request by username and request_id"""
+    async def delete_weather_request(request_id: str):
+        logging.info(f"Delete operation initiated for request_id: {request_id}")
         result = await db.weather_requests.delete_one(
-            {"username": username, "_id": ObjectId(request_id)}
+            {"_id": request_id}  # Remove username check
         )
+        
         if result.deleted_count:
-            await CRUDService.log_operation(username, "DELETE", request_id)
+            # Note: You might want to fetch the username before deletion if you need it for logging
+            await CRUDService.log_operation("system", "DELETE", request_id)
+        else:
+            logging.error(f"No document found for request_id: {request_id}")
         return result.deleted_count
