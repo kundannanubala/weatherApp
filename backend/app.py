@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 import uvicorn
-from api import location, icon, weather, crud, user
+from api import location, icon, weather, crud, user, llm
 from fastapi.middleware.cors import CORSMiddleware
 
     
@@ -27,6 +27,7 @@ app.include_router(location.router, prefix="/location", tags=["location"])
 app.include_router(icon.router, prefix="/icon", tags=["icon"])
 app.include_router(crud.router, prefix="/crud", tags=["crud"])
 app.include_router(user.router, prefix="/user", tags=["user"])
+app.include_router(llm.router, prefix="/llm", tags=["llm"])
 
 def main():
     uvicorn.run(app, host="0.0.0.0", port=8000)
