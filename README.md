@@ -169,56 +169,7 @@ The frontend will be available at `http://localhost:3000`
     - `icon_code` (string)
     - `size` (string, optional, default="2x")
 
-## Environment Variables
 
-### Backend (.env)
-1. Clone the repository and navigate to the backend directory:
-
-```bash
-git clone <repository-url>
-cd backend
-```
-
-2. Create a virtual environment and activate it:
-
-```bash
-python -m venv venv
-source venv/bin/activate # On Windows: venv\Scripts\activate
-``` 
-
-3. Install the required packages:
-
-```bash
-pip install -r requirements.txt
-```
-
-4. Create a `.env` file in the backend directory:
-
-```bash
-weatherAPI=your_openweathermap_api_key
-groqAPI=your_groq_api_key
-MongoDB_URI=mongodb://localhost:27017
-```
-
-### Frontend Setup
-
-1. Navigate to the frontend directory:
-
-```bash
-cd frontend
-```
-
-2. Install the required packages:
-
-```bash
-npm install
-```
-
-3. Create a `.env.local` file in the frontend directory:
-
-```bash
-NEXT_PUBLIC_API_URL=http://localhost:8000
-```
 ## Database Setup
 
 1. Install MongoDB if not already installed
