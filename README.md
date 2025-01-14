@@ -1,6 +1,6 @@
 # Weather App
 
-A modern weather application built with Next.js and FastAPI that provides real-time weather information and forecasts with AI-powered weather analysis.
+A modern weather application built with React.js and FastAPI that provides real-time weather information and forecasts with AI-powered weather analysis.
 
 ## Features
 
